@@ -1,0 +1,25 @@
+class Solution {
+    public int maximumLength(String s) {
+      HashMap<String,Integer> hm=new HashMap<>();int max=-1;
+      for(int i=0;i<s.length();i++) {
+          String a="";
+          for(int j=i;j<s.length();j++){
+              a=a+s.charAt(j);
+              if(special(a))
+              hm.put(a,hm.getOrDefault(a,0)+1);
+          }
+      } 
+      for(Map.Entry<String,Integer> me:hm.entrySet()){
+          if((Integer)me.getValue()>=3)
+          max=Math.max(max,((String)me.getKey()).length());
+      }
+      return max;
+    }
+    public boolean special(String a){
+        for(int i=0;i<a.length()-1;i++){
+            if(a.charAt(i)!=a.charAt(i+1))
+            return false;
+        }
+        return true;
+    }
+}

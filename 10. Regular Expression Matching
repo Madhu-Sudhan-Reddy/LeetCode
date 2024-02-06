@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isMatch(String text, String pattern) {
+   boolean[][] arr=new boolean[text.length()+1][pattern.length()+1];
+    
+    arr[0][0]=true;
+     for (int i = 1; i < arr[0].length; i++) {
+            if (pattern.charAt(i-1) == '*') {
+                arr[0][i] = arr[0][i - 2];
+            }
+        }
+    for(int i=0;i<text.length();i++){
+      for(int j=0;j<pattern.length();j++){
+        if(text.charAt(i)==pattern.charAt(j)||pattern.charAt(j)=='.')
+          arr[i+1][j+1]=arr[i][j];
+        else if(pattern.charAt(j)=='*'){
+          arr[i+1][j+1]=arr[i+1][j-1]; // zero occurence
+           if (pattern.charAt(j-1) == '.' || pattern.charAt(j-1) == text.charAt(i)) {
+                        arr[i+1][j+1] = arr[i+1][j+1] | arr[i][j+1];
+                    }
+      }
+        else{
+          arr[i+1][j+1]=false;
+        }
+    }
+    
+  }
+    return arr[text.length()][pattern.length()];
+
+    }
+}

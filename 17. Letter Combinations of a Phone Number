@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> ls=new ArrayList<>();
+        HashMap<Character,String> hm=new HashMap<>();
+        if(digits.length()==0)
+        return ls;
+        //char[] c={2,3,4,5,6,7,8,9};         
+           hm.put('2',"abc");
+           hm.put('3',"def");hm.put('4',"ghi");hm.put('5',"jkl");
+           hm.put('6',"mno");hm.put('7',"pqrs");hm.put('8',"tuv");hm.put('9',"wxyz");
+       //System.out.println(hm.keySet());
+        combinations(ls,digits,hm,"",0);
+        return ls;
+    }
+    public void combinations(List<String> ls, String digits,HashMap<Character,String> hm,String s,int i){
+        if(digits.length()==i){
+            ls.add(s);
+            return;
+        }
+        //for(int i=0;i<digits.length();i++){
+            for(int j=0;j<hm.get(digits.charAt(i)).length();j++){
+            s=s+hm.get(digits.charAt(i)).charAt(j);
+            combinations(ls,digits,hm,s,i+1);
+            s=s.substring(0,s.length()-1);
+            }
+        //}
+    }
+}

@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> ls=new ArrayList<>();
+        Arrays.sort(nums);
+        solve(ls,new ArrayList<>(),nums,new boolean[nums.length],nums.length);
+        return ls;
+    }
+    public void solve(List<List<Integer>> ls,List<Integer> l,int[] nums,boolean[] st,int n){
+        if(l.size()==n){
+            ls.add(new ArrayList<>(l));
+            System.out.println(l);
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(st[i] ||i>0&&nums[i]==nums[i-1] &&!st[i-1])
+            continue;
+            st[i]=true;
+            l.add(nums[i]);
+            solve(ls,l,nums,st,n);
+            st[i]=false;
+            l.remove(l.size()-1);
+        }
+    }
+}

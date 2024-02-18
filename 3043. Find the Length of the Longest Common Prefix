@@ -1,0 +1,21 @@
+class Solution {
+    public int longestCommonPrefix(int[] arr1, int[] arr2) {
+        HashSet<Integer> ls=new HashSet<>();int max=0;
+        for(int i=0;i<arr1.length;i++){
+            int j=arr1[i];
+            while(j>0){
+                ls.add(j);
+                j=j/10;
+            }
+        }
+       for(int i=0;i<arr2.length;i++){
+           int j=arr2[i];
+           while(j>0){
+               if(ls.contains(j))
+                   max=Math.max(max,(j+"").length());
+               j=j/10;
+           }
+       } 
+        return max;
+    }
+}

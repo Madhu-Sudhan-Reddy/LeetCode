@@ -1,0 +1,26 @@
+class Solution {
+    public String customSortString(String order, String s) {
+       String[] arr=new String[s.length()];
+       Set<Character> st=new LinkedHashSet<>(); 
+       Map<Character,Integer> hm=new HashMap<>(); 
+    String br="",cr="";
+       for(int i=0;i<order.length();i++)
+       st.add(order.charAt(i));
+       for(int i=0;i<s.length();i++){
+           if(st.contains(s.charAt(i)))
+           hm.put(s.charAt(i),hm.getOrDefault(s.charAt(i),0)+1);
+           else
+            cr=cr+s.charAt(i);
+       }
+       System.out.println(hm);
+       System.out.println(Arrays.toString(arr));
+       //int j=0;
+       for(int i=0;i<order.length();i++){
+           while(hm.containsKey(order.charAt(i))&&hm.get(order.charAt(i))>0){
+               br+=order.charAt(i)+"";
+               hm.put(order.charAt(i),hm.get(order.charAt(i))-1);
+           }
+       }
+       return br+cr;
+    }
+}

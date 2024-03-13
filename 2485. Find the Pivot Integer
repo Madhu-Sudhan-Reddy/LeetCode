@@ -1,0 +1,14 @@
+class Solution {
+    public int pivotInteger(int n) {
+        float a=(n)*(n+1)/2;
+        float sum=0;
+        for(int i=1;i<=n;i++){
+            sum=sum+i;
+            if((a+i)/2==sum)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}

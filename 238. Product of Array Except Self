@@ -1,0 +1,23 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] arr=new int[nums.length];
+        int mul=1;boolean ze=false;int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0)
+            mul=mul*nums[i];
+            else
+            {ze=true;
+            count++;
+            }
+        }
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0&&ze==false)
+            arr[i]=mul/nums[i];
+            else if((nums[i]!=0&&ze==true)||count>1)
+            arr[i]=0;
+            else
+            arr[i]=mul;
+        }
+        return arr;
+    }
+}

@@ -1,0 +1,42 @@
+class Solution {
+   /* int[] a=new int[2];
+    public Solution(int c,int d){
+        this.a[0]=c;
+        this.a[1]=d;
+    }*/
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+         int i=0;
+        int start=newInterval[0];
+        int end=newInterval[1];
+        List<Integer> s=new ArrayList<Integer>();
+        while(i<intervals.length&&intervals[i][1]<newInterval[0])
+        {s.add(intervals[i][0]);
+        s.add(intervals[i][1]);
+        i++;
+        }
+        System.out.println(s);
+        while(i<intervals.length&&intervals[i][0]<=newInterval[1])
+        {
+            newInterval[0]=Math.min(newInterval[0],intervals[i][0]);
+            newInterval[1]=Math.max(newInterval[1],intervals[i][1]);
+            i++;
+        }
+        s.add(newInterval[0]);s.add(newInterval[1]);
+        System.out.println(s);
+         while(i<intervals.length)
+        {
+            s.add(intervals[i][0]);
+            s.add(intervals[i][1]);
+            i++;
+        }
+        System.out.println(s);
+        int d=s.size();
+        int[][] car=new int[d/2][2];
+        for(int m=0;m<d;m=m+2){
+           car[m/2][0]= s.get(m);
+           car[m/2][1]=s.get(m+1);
+        }
+        return car;
+
+    }
+}

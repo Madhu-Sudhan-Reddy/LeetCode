@@ -1,0 +1,54 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        Deque<ListNode> dq=new LinkedList<>();
+        ListNode temp=head;
+        ListNode ls=head;
+        while(temp!=null){
+            dq.add(temp);
+            temp=temp.next;
+        }
+        int count=dq.size();
+        int st=count;
+        //System.out.println(st);
+        while(count>1){
+            if(count==st){
+                dq.removeFirst();
+                ls.next=dq.pollLast();
+                ls=ls.next;
+            }
+            else{
+                //System.out.println(dq.peekFirst().val);
+                //System.out.println(dq.peekLast().val);
+                ls.next=dq.pollFirst();
+                ls=ls.next;
+                //System.out.println(ls.val);
+                ls.next=dq.pollLast();
+                ls=ls.next;
+                //System.out.println(ls.val);
+                //dq.removeFirst();
+                //dq.removeLast();
+                //System.out.println(dq.size());
+            }
+            count=count-2;
+            //System.out.println(count);
+        }
+        if(count==1&&st%2==1)
+        {ls.next=dq.pop();
+        ls.next.next=null;
+        }
+        else
+        ls.next=null;
+
+        //return head;
+    }
+}
